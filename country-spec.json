@@ -1,0 +1,52 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Number of F1 Circuits by Country",
+    "data": {
+        "url": "circuits.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "transform": [
+        {
+            "aggregate": [
+                {
+                    "op": "count",
+                    "as": "count"
+                }
+            ],
+            "groupby": ["country"]
+        }
+    ],
+    "mark": "bar",
+    "encoding": {
+        "x": {
+            "field": "country",
+            "type": "ordinal",
+            "sort": "-y",
+            "axis": {
+                "title": "Country",
+                "labelAngle": -45
+            }
+        },
+        "y": {
+            "field": "count",
+            "type": "quantitative",
+            "axis": {
+                "title": "Number of Circuits"
+            }
+        },
+        "tooltip": [
+            {
+                "field": "country",
+                "type": "nominal",
+                "title": "Country"
+            },
+            {
+                "field": "count",
+                "type": "quantitative",
+                "title": "Number of Circuits"
+            }
+        ]
+    }
+}

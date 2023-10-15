@@ -1,0 +1,62 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "F1 Circuits Locations",
+    "width": 600,
+    "height": 400,
+    "layer": [
+        {
+            "data": {
+                "url": "https://vega.github.io/vega-datasets/data/world-110m.json",
+                "format": {
+                    "type": "topojson",
+                    "feature": "countries"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "#ddd",
+                "stroke": "#fff"
+            }
+        },
+        {
+            "data": {
+                "url": "circuits.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "mark": "circle",
+            "encoding": {
+                "longitude": {
+                    "field": "lng",
+                    "type": "quantitative"
+                },
+                "latitude": {
+                    "field": "lat",
+                    "type": "quantitative"
+                },
+                "size": {
+                    "value": 100
+                },
+                "tooltip": [
+                    {
+                        "field": "name",
+                        "type": "nominal",
+                        "title": "Circuit Name"
+                    },
+                    {
+                        "field": "location",
+                        "type": "nominal",
+                        "title": "Location"
+                    },
+                    {
+                        "field": "country",
+                        "type": "nominal",
+                        "title": "Country"
+                    }
+                ]
+            }
+        }
+    ]
+}
+

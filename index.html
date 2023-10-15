@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            background-image: url('sergio-perez-red-bull-racing-r-1.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 0;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 48px;
+            color: white;
+        }
+
+        .viz-container {
+            margin: 20px auto; 
+            text-align: center;
+            display: block; 
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 20px; 
+            border-radius: 10px; 
+            max-width: 900px; 
+        }
+
+        .description {
+            margin-top: 10px;
+            max-width: 800px;
+            text-align: left;
+            margin-left: auto; 
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="cover">
+        <h1>Formula 1 Introduction</h1>
+    </div>
+
+    <div id="map" class="viz-container">
+        <div id="map-viz"></div>
+        <div class="description">
+            Formula 1 racing is a global motor sport that takes place every year in multiple countries and cities around the world. The location selection of an F1 track is a complex and delicate process involving geographical location, climate, track design, culture, history, as well as economic and political factors.
+        </div>
+    </div>
+
+    <div id="bar" class="viz-container">
+        <div id="bar-viz"></div>
+        <div class="description">
+            The altitude of an F1 track is an often overlooked but highly influential factor that has a profound impact on the performance of the car and the strategy of the driver. The altitude of each track is different, from lowlands near sea level to plateaus up to thousands of meters, and each brings its own unique challenges and opportunities.
+        </div>
+    </div>
+
+    <div id="country" class="viz-container">
+        <div id="country-viz"></div>
+        <div class="description">
+            F1's global footprint reveals a rich international diversity. Each country gives the track a unique personality with its unique cultural, geographical and technical features. The distribution of the number of tracks not only reflects the global reach of F1, but also reveals the passion and commitment that countries have for this premier motorsport.
+        </div>
+    </div>
+
+    <div id="drivers" class="viz-container">
+        <div id="drivers-viz"></div>
+        <div class="description">
+            Formula 1 drivers throughout history are a group of passionate, highly skilled professionals who demonstrate unmatched speed and skill on circuits around the world. Since the birth of the Formula One World Championship in 1950, hundreds of drivers have contributed their courage, determination and craftsmanship to the sport. Some of them became legends, and their names and spectacular victories will go down in history. Every F1 driver is the embodiment of speed and passion, and every battle they have on the track is a challenge to the limits of humanity and an endless pursuit of victory.
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const specs = {
+            'map-viz': 'map-spec.json',
+            'bar-viz': 'bar-spec.json',
+            'country-viz': 'country-spec.json',
+            'drivers-viz': 'drivers-spec.json'
+        };
+
+        for (const [id, url] of Object.entries(specs)) {
+            fetch(url)
+                .then(response => response.json())
+                .then(spec => {
+                    vegaEmbed(`#${id}`, spec);
+                })
+                .catch(error => console.error('Error loading the Vega-Lite specification:', error));
+        }
+    </script>
+</body>
+</html>
