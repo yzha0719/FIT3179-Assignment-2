@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Circuits Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <style>
+        body {
+            background-color: grey; /* 设置整个网页背景为灰色 */
+            text-align: center;
+        }
+        h1 {
+            color: blue;
+            margin-bottom: 40px;
+        }
+        .viz-container {
+            margin: 20px;
+            text-align: center;
+            display: inline-block;
+            background-color: white; /* 设置图表背景为白色 */
+            padding: 20px; /* 添加内边距 */
+            border-radius: 10px; /* 添加边框圆角 */
+        }
+        .description {
+            margin-top: 10px;
+            max-width: 800px;
+            text-align: left;
+            margin-left: auto; 
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formula 1 Circuits Introduction</h1>
+
+    <div id="map" class="viz-container">
+        <div id="map-viz"></div>
+        <div class="description">
+            This map displays the specific locations of F1 circuits around the world. Each circle represents a circuit, allowing users to quickly grasp the geographical locations of each racing track. This is a valuable resource for F1 enthusiasts and analysts, offering insights into the spatial distribution of circuits and exploring geographical and climatic factors that might impact race performance and outcomes.
+        </div>
+    </div>
+
+    <div id="bar" class="viz-container">
+        <div id="bar-viz"></div>
+        <div class="description">
+            This bar chart illustrates the altitudes of various F1 circuits. Each bar represents a circuit, with the height of the bar indicating the circuit’s altitude. This visual representation aids in analyzing the variance in altitudes among circuits, contributing to an understanding of how altitude can affect car performance and racing strategies. For instance, different altitudes can influence a car's aerodynamics and engine performance.
+        </div>
+    </div>
+
+    <div id="country" class="viz-container">
+        <div id="country-viz"></div>
+        <div class="description">
+            This bar chart depicts the number of F1 circuits in each country. It provides a clear view of which countries are popular hosts for F1 racing. This aids in analyzing the global popularity of F1 racing and the standing of each country in international racing competitions. For event organizers and sponsors, this information is instrumental in making informed decisions regarding circuit selection and investments.
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const specs = {
+            'map-viz': 'map-spec.json',
+            'bar-viz': 'bar-spec.json',
+            'country-viz': 'country-spec.json'
+        };
+
+        for (const [id, url] of Object.entries(specs)) {
+            fetch(url)
+                .then(response => response.json())
+                .then(spec => {
+                    vegaEmbed(`#${id}`, spec);
+                })
+                .catch(error => console.error('Error loading the Vega-Lite specification:', error));
+        }
+    </script>
+</body>
+</html>
